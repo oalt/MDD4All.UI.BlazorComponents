@@ -1,0 +1,28 @@
+﻿.collapsed-ribbon {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    height: 25px;
+    background-color: #eaeaea;
+}
+
+.expanded-ribbon {
+    display: grid;
+    grid-template-columns: 1fr 20px;
+}
+
+.ribbon-content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100px;
+    background-color: #eaeaea;
+}
+
+.collapse-button {
+    background-color: #eaeaea;
+}
+
+.collapse-button:hover {
+    background-color: #808080;
+}

@@ -1,0 +1,20 @@
+﻿<CascadingValue Value="this">
+    <div class="main-layout">
+        <div>
+            <ul class="nav nav-tabs">
+                @foreach (TabPage tabPage in Pages)
+                {
+                    <li class="nav-item">
+                        <a class="@GetButtonClass(tabPage)" @onclick=@( () => ActivatePage(tabPage) )>@tabPage.Header</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="tab-content">
+            @ChildContent
+        </div>
+
+    </div>
+</CascadingValue>
+
+

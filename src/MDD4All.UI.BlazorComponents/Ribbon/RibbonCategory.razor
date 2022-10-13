@@ -1,0 +1,17 @@
+﻿<div>
+    @if (Collapsed)
+    {
+    <div class="collapsed-ribbon">
+        <div class="collapse-button" @onclick="OnCollapseButtonClick"><i class="bi bi-chevron-down"></i></div>
+    </div>
+    }
+    else
+    {
+<div class="expanded-ribbon">
+    <div class="ribbon-content">
+        @ChildContent
+    </div>
+    <div class="collapse-button" @onclick="OnCollapseButtonClick"><i class="bi bi-chevron-up"></i></div>
+</div>
+    }
+</div>
