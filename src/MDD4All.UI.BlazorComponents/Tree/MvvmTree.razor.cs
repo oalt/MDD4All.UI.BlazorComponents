@@ -46,51 +46,7 @@ namespace MDD4All.UI.BlazorComponents.Tree
 
         private void OnSelectNode(ITreeNode node)
         {
-            if(node.SelectedNode != null)
-            {
-                node.SelectedNode.IsSelected = false;
-            }
-
-            node.SelectedNode = node;
-            node.SelectedNode.IsSelected = true;
-
-            //if (node.IsDisabled)
-            //{
-            //    return;
-            //}
-
-            
             SelectedNodeChanged.InvokeAsync(node);
-
-            
-        }
-
-        private ITreeNode FindRootNode(ITreeNode currentNode)
-        {
-            ITreeNode node = currentNode;
-            while(node.Parent != null)
-            {
-                node = node.Parent;
-            }
-
-            return node;
-        }
-
-        private void DeselectAllNodes(ITreeNode contextNode)
-        {
-            ITreeNode rootNode = FindRootNode(contextNode);
-
-            DeselectAllNodesRecusrsively(rootNode);
-        }
-
-        private void DeselectAllNodesRecusrsively(ITreeNode node)
-        {
-            node.IsSelected = false;
-
-            foreach(ITreeNode child in node.Children)
-            {
-                DeselectAllNodesRecusrsively(child);
-            }
         }
 
     }
