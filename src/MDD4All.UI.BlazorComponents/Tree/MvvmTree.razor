@@ -1,46 +1,8 @@
-﻿@using MDD4All.UI.DataModels.Tree
-@using Microsoft.AspNetCore.Components.Web
-@using MDD4All.UI.BlazorComponents.Tree
+﻿@typeparam TNode
+<MvvmTreeNode TNode="TNode" 
+              DataContext="@DataContext.TreeRootNodes[0]" 
+              TitleTemplate="@TitleTemplate" 
+              LoadingTemplate="@LoadingTemplate"
+              TreeNodeChanged="OnTreeNodeStateChanged">
 
-@typeparam TNode
-
-<div class="uic-tree @(Visible ? "" : "uic-tree--hidden")">
-    
-    @foreach (TNode n in Nodes)
-    {
-        ITreeNode node = n as ITreeNode;
-
-        <div>
-            
-            @if (node.HasChildNodes)
-            {
-                <span class="uic-tree__icon" 
-                      @onclick="@(() => OnToggleNode(node, !node.IsExpanded))">
-                    <i class="@(node.IsLoading ? Style.NodeLoadingClass : node.IsExpanded ? Style.CollapseNodeIconClass : Style.ExpandNodeIconClass)"></i>
-                </span>
-            }
-
-            <div class="uic-tree__title">
-                <span class="@Style.NodeTitleClass @(node.IsSelected ? Style.NodeTitleSelectedClass : node.IsDisabled ? Style.NodeTitleDisabledClass : Style.NodeTitleSelectableClass)" 
-                      @onclick="@(() => OnSelectNode(node))">
-                    @TitleTemplate((TNode)node)
-                </span>
-            </div>
-
-            @if (node.HasChildNodes && node.IsExpanded)
-            {
-                <MvvmTree @key="node"
-                          TNode="TNode"
-                          Nodes="node.Children"
-                          TitleTemplate="TitleTemplate" 
-                          Style="Style"
-                          Visible="node.IsExpanded"
-                          SelectedNodeChanged="SelectedNodeChanged" />
-            }
-            
-        </div>
-    }
-
-</div>
-
-
+</MvvmTreeNode>
