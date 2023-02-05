@@ -18,10 +18,10 @@
                         break;
                     case ModalDialogType.OkCancel:
                         <button type="button" class="btn btn-primary" @onclick=@ModalOk>OK</button>
-                        <button type="button" class="btn" @onclick="@ModalCancel">Cancel</button>
+                        <button type="button" class="btn" @onclick="@ModalCancel">@L["Button.Cancel"]</button>
                         break;
                     case ModalDialogType.DeleteCancel:
-                        <button type="button" class="btn" @onclick="@ModalCancel">Cancel</button>
+                        <button type="button" class="btn" @onclick="@ModalCancel">@L["Button.Cancel"]</button>
                         <button type="button" class="btn btn-danger" @onclick=@ModalOk>Delete</button>
                         break;
                 }

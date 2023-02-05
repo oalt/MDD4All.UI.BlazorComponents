@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
 
 namespace MDD4All.UI.BlazorComponents.Dialog
 {
     public partial class ModalDialog
     {
+        [Inject]
+        private IStringLocalizer<ModalDialog> L { get; set; }
+
         [Parameter]
         public string Title { get; set; }
 
@@ -15,6 +19,22 @@ namespace MDD4All.UI.BlazorComponents.Dialog
 
         [Parameter]
         public ModalDialogType DialogType { get; set; } = ModalDialogType.Ok;
+
+        [Parameter]
+        public bool CanConfirm 
+        { 
+            get;
+            
+            set; 
+        
+        } = true;
+
+        
+
+        protected override void OnInitialized()
+        {
+            
+        }
 
         private Task ModalCancel()
         {
