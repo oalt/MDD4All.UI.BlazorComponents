@@ -1,0 +1,26 @@
+﻿@page "/"
+@using MDD4All.UI.BlazorComponents.PropertyPanel
+
+<PageTitle>Index</PageTitle>
+<div>
+    <PropertyTable>
+        <PropertyRow TProperty="string"
+                     @bind-Value=Text 
+                     Name="Text"/>
+
+        <PropertyRow TProperty="double"
+                     @bind-Value=X
+                     Name="X" />
+
+        <PropertyRow TProperty="int"
+                     @bind-Value=Z
+                     Name="Z" />
+    </PropertyTable>
+</div>
+<p>
+    Text = @Text<br/>
+    X = @X<br/>
+    Z = @Z
+
+</p>
+
