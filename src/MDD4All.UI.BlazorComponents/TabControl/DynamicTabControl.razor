@@ -1,0 +1,49 @@
+﻿@using MDD4All.UI.DataModels.TabControl
+<CascadingValue Value="this">
+    <div class="main-layout">
+        
+        <div>
+            <ul class="nav nav-tabs">
+                @foreach (ITabPage tabPage in DataContext.Pages)
+                {
+                    <li class="nav-item">
+                        <div class="input-group">
+                            @if(DataContext.ActivePage == tabPage)
+                            {
+                                <label class="input-group-text"
+                                       style="background: white;"
+                                       @onclick=@( () => ActivatePage(tabPage) )>
+                                   <strong>
+                                      @tabPage.Header
+                                   </strong>
+                                </label>
+                                <button class="btn btn-outline-secondary"
+                                        type="button"
+                                        @onclick=@( () => OnRemoveButtonPressed(tabPage) )>
+                                    <i class="bi bi-x"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <label class="input-group-text"
+                                       @onclick=@( () => ActivatePage(tabPage) )>@tabPage.Header</label>
+                            }
+                            
+                        </div>
+                        
+                        
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="tab-content">
+
+            @foreach (ITabPage tabPage in DataContext.Pages)
+            {
+                <DynamicTabPage DataContext="tabPage" />
+            }
+
+        </div>
+
+    </div>
+</CascadingValue>

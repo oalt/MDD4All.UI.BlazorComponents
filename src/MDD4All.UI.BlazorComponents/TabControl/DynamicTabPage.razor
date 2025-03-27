@@ -1,0 +1,6 @@
+﻿@if (Parent.DataContext.ActivePage == DataContext)
+{
+    <CascadingValue Value="@DataContext" Name="DataContext">
+        <DynamicComponent Type="@DataContext.ViewType" />
+    </CascadingValue>
+}

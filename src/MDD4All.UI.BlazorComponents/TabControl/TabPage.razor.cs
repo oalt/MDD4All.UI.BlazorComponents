@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace MDD4All.UI.BlazorComponents.TabControl
 {
     public partial class TabPage
     {
+        //[Parameter]
+        //public ViewModelBase
+
         [CascadingParameter]
         private TabControl Parent { get; set; }
 

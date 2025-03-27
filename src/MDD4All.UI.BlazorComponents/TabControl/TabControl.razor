@@ -2,7 +2,7 @@
     <div class="main-layout">
         <div>
             <ul class="nav nav-tabs">
-                @foreach (TabPage tabPage in Pages)
+                @foreach (TabPage tabPage in TabPages)
                 {
                     <li class="nav-item">
                         <a class="@GetButtonClass(tabPage)" @onclick=@( () => ActivatePage(tabPage) )>@tabPage.Header</a>

@@ -8,13 +8,27 @@
         {
             <input type="text" 
                    @bind=Value
-                   style="border:0px;" />
+                   style="border:0px;width:100%" />
         }
         else if(typeof(TProperty) == typeof(double) ||
                 typeof(TProperty) == typeof(int))
         {
             <input type="number" @bind=Value
-                         style="border:0px;" />
+            style="border:0px;width:100%" />
+        }
+        else if(typeof(TProperty).IsEnum)
+        {
+            <select @bind=Value
+                    style="width:100%">
+                @foreach(var enumValue in Enum.GetValues(typeof(TProperty)))
+                {
+                    <option value="@enumValue">@enumValue</option>
+                }
+            </select>
+        }
+        else if(typeof(TProperty) == typeof(bool))
+        {
+            <input type="checkbox" @bind=Value />
         }
 
     </td>

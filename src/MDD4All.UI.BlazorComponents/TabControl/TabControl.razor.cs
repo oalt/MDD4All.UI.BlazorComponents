@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 
 namespace MDD4All.UI.BlazorComponents.TabControl
 {
@@ -14,7 +9,13 @@ namespace MDD4All.UI.BlazorComponents.TabControl
 
         public TabPage ActivePage { get; set; }
 
-        List<TabPage> Pages = new List<TabPage>();
+        List<TabPage> TabPages = new List<TabPage>();
+
+        protected override void OnInitialized()
+        {
+            TabPages = new List<TabPage>();
+        }
+
         string GetButtonClass(TabPage page)
         {
             return page == ActivePage ? "nav-link active" : "nav-link";
@@ -27,13 +28,16 @@ namespace MDD4All.UI.BlazorComponents.TabControl
 
         internal void AddPage(TabPage tabPage)
         {
-            Pages.Add(tabPage);
-            if (Pages.Count == 1)
+            TabPages.Add(tabPage);
+            if (TabPages.Count == 1)
             {
                 ActivePage = tabPage;
             }
 
             StateHasChanged();
         }
+
+        
     }
+
 }
