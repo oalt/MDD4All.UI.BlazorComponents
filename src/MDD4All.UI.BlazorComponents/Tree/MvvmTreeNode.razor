@@ -4,7 +4,9 @@
 
 @typeparam TNode
 
-<div class="uic-tree">
+<div class="uic-tree"
+     draggable="true"
+     @ondragstart="OnDragNodeStart">
 
     @if (DataContext.Children.Any())
     {

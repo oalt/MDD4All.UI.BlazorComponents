@@ -8,10 +8,13 @@
 
 .uic-tree__icon {
     float: left;
+    font-size: 15px;
 }
 
 .uic-tree__title {
     margin-left: 1.25rem;
+    white-space: nowrap;
+    font-size: 15px;
 }
 
 .uic-tree--cursor-pointer {

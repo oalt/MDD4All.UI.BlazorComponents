@@ -1,15 +1,17 @@
-﻿namespace MDD4All.UI.BlazorComponents.Services
+﻿using MDD4All.UI.DataModels.DragDrop;
+
+namespace MDD4All.UI.BlazorComponents.Services
 {
     public class DragDropDataProvider
     {
-        private object _data;
+        private DragDropInformation _data;
 
-        public void SetData(object data)
+        public void SetData(DragDropInformation data)
         {
             _data = data;
         }
         
-        public object GetData()
+        public DragDropInformation GetData()
         {
             return _data;   
         }

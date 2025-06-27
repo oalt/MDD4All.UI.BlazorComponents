@@ -1,3 +1,5 @@
+using MDD4All.UI.BlazorComponents.Services;
+using MDD4All.UI.DataModels.DragDrop;
 using MDD4All.UI.DataModels.Tree;
 using Microsoft.AspNetCore.Components;
           
@@ -5,6 +7,9 @@ namespace MDD4All.UI.BlazorComponents.Tree
 {
     public partial class MvvmTreeNode<TNode>
     {
+        [Inject]
+        public DragDropDataProvider DragDropDataProvider { get; set; }
+
         [Parameter]
         public ITreeNode DataContext { get; set; }
 
@@ -66,6 +71,18 @@ namespace MDD4All.UI.BlazorComponents.Tree
                         TreeNodeChanged.InvokeAsync();
                     }
                 }
+            }
+        }
+
+        private void OnDragNodeStart()
+        {
+            if(!DataContext.IsLoading)
+            {
+                DragDropDataProvider.SetData(new DragDropInformation
+                {
+                    Data = DataContext,
+                    OperationInformation = DataContext.DragDropOperationInformation
+                });
             }
         }
 
