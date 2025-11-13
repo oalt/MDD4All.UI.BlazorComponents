@@ -12,7 +12,21 @@
     {
         <span class="uic-tree__icon"
                 @onclick="@(() => OnToggleNode(DataContext, !DataContext.IsExpanded))">
-            <i class="@(DataContext.IsLoading ? Style.NodeLoadingClass : DataContext.IsExpanded ? Style.CollapseNodeIconClass : Style.ExpandNodeIconClass)"></i>
+                @if(DataContext.IsLoading)
+                {
+                <span>Loading...</span>
+            }
+            else
+            {
+                if(DataContext.IsExpanded)
+                {
+                    <span>⊖</span>
+                }
+                else
+                {
+                    <span>⊕</span>
+                }
+            }
         </span>
     }
 
