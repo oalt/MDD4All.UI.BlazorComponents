@@ -1,0 +1,8 @@
+﻿.errorListTable {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: ghostwhite;
+    margin-bottom: 0px;
+}

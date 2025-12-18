@@ -36,6 +36,11 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>ModalDialog.resx</DependentUpon>
       </Compile>
+      <Compile Update="Resources\ErrorList\ErrorListPanel.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>ErrorListPanel.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 
 
@@ -48,6 +53,10 @@
       <EmbeddedResource Update="Resources\Dialog\ModalDialog.resx">
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>ModalDialog.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\ErrorList\ErrorListPanel.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>ErrorListPanel.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
 

@@ -1,0 +1,16 @@
+﻿@if (DataContext != null)
+{
+    switch(DataContext.ErrorType)
+    {
+        case DataModels.ErrorList.ErrorType.Error:
+            <span style="color:red">⭙</span>
+            break;
+        case DataModels.ErrorList.ErrorType.Warning:
+            <span style="color:darkgoldenrod">⚠</span>
+            break;
+        case DataModels.ErrorList.ErrorType.Message:
+            <span style="color:blue">🛈</span>
+            break;
+    }
+}
+

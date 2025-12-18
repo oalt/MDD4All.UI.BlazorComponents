@@ -1,0 +1,42 @@
+﻿@using MDD4All.UI.DataModels.ErrorList
+@if(ShowTitle)
+{
+    <strong>@L["Label.ErrorList"]</strong>
+}
+<table class="table table-bordered table-hover table-sm errorListTable">
+    <thead>
+        <tr>
+            <th></th>
+            @if(DataContext.ShowErrorCode)
+            {
+                <th>@L["Label.ErrorCode"]</th>
+            }
+
+            <th>@L["Label.Description"]</th>
+            <th>@L["Label.Element"]</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(IErrorListElement errorListElement in DataContext.Errors)
+        {
+            <tr>
+                <td style="text-align: center; width: 20px;"><ErrorIcon DataContext="errorListElement" /></td>
+                @if (DataContext.ShowErrorCode)
+                {
+                    <th>@errorListElement.ErrorCode</th>
+                }
+                @if(EL == null) @* direct value or localized strings *@
+                {
+                    <td>@((MarkupString)errorListElement.Description)</td>
+                    <td>@errorListElement.EffectedElement</td>
+                }
+                else
+                {
+                    <td>@((MarkupString)EL[errorListElement.Description, errorListElement.LocalizationParameters].ToString())</td>
+                    <td>@EL[errorListElement.EffectedElement, errorListElement.LocalizationParameters]</td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>
