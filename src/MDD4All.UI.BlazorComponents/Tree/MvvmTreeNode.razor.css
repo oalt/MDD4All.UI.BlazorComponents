@@ -1,22 +1,68 @@
-﻿.uic-tree .uic-tree {
-    margin-left: 1.25rem;
+﻿/* --- MvvmTreeNode.razor.css --- */
+
+.uic-tree-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    /* Höhe leicht erhöht für bessere Klickbarkeit bei Zoom */
+    height: 1.5rem;
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    width: max-content;
+    min-width: 100%;
+    /* Abstände in rem für Skalierbarkeit */
+    margin-left: 0.5rem;
+    margin-right: 0.375rem;
+    padding: 0 0.375rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.1s;
 }
 
-.uic-tree--hidden {
-    display: none;
+    .uic-tree-row.is-selected {
+        background-color: var(--hover-blue) !important; /* Nutzt globale Variable */
+        color: var(--accent-color) !important; /* Nutzt globale Variable */
+        font-weight: 600;
+    }
+
+    .uic-tree-row:hover {
+        background-color: #f0f0f0 !important;
+        color: #000 !important;
+    }
+
+.uic-tree__icon-box {
+    /* Icon-Box in rem für Proportion zum Text */
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
 }
 
-.uic-tree__icon {
-    float: left;
-    font-size: 15px;
+.tree-svg {
+    width: 0.8rem;
+    height: 0.8rem;
+    fill: none;
+    stroke: #000000 !important;
+    stroke-width: 1.4px; /* SVG-Stroke kann in px bleiben für Schärfe */
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .uic-tree__title {
-    margin-left: 1.25rem;
-    white-space: nowrap;
-    font-size: 15px;
+    /* Nutzt nun automatisch die globale Schriftgröße oder rem */
+    font-size: 0.95rem;
+    user-select: none;
+    padding-left: 0.375rem;
 }
 
-.uic-tree--cursor-pointer {
-    cursor: pointer;
+.uic-tree__children {
+    position: relative;
+    /* Einzug der Kinder in rem */
+    margin-left: 1.5rem;
+    border-left: 1px solid var(--border-color); /* Nutzt globale Variable */
+    padding-left: 0.125rem;
+    margin-top: 0;
+    min-width: max-content;
 }

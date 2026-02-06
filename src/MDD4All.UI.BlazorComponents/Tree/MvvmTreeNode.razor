@@ -4,80 +4,41 @@
 
 @typeparam TNode
 
-<div class="uic-tree"
-     draggable="true"
-     @ondragstart="OnDragNodeStart">
-
-    @if (DataContext.Children.Any())
-    {
-        <span class="uic-tree__icon"
-                @onclick="@(() => OnToggleNode(DataContext, !DataContext.IsExpanded))">
-                @if(DataContext.IsLoading)
-                {
-                <span>Loading...</span>
+@* Row-Container mit dynamischer Selektions-Klasse *@
+<div class="uic-tree-row @(DataContext.IsSelected ? "is-selected" : "")" @onclick="@(() => OnSelectNode(DataContext))">
+    <span class="uic-tree__icon-box" @onclick="@(() => OnToggleNode(DataContext, !DataContext.IsExpanded))" @onclick:stopPropagation="true">
+        @if (DataContext.Children.Any())
+        {
+            @if (DataContext.IsExpanded)
+            {
+                <svg class="tree-svg" viewBox="0 0 24 24">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
             }
             else
             {
-                if(DataContext.IsExpanded)
-                {
-                    <span>⊖</span>
-                }
-                else
-                {
-                    <span>⊕</span>
-                }
+                <svg class="tree-svg" viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
             }
-        </span>
-    }
-
-    @if (DataContext.IsLoading)
-    {
-        <div class="uic-tree__title">
-            @if (LoadingTemplate != null)
-            {
-                <span class="@Style.NodeTitleClass">
-                    @LoadingTemplate((TNode)DataContext)
-                </span>
-            }
-            else
-            {
-                <span class="placeholder-glow">
-                    <span class="placeholder col-7"></span>
-                </span>
-            }
-
-        </div>
-    }
-    else
-    {
-        <div class="uic-tree__title">
-            <span class="@Style.NodeTitleClass @(DataContext.IsSelected ? Style.NodeTitleSelectedClass : DataContext.IsDisabled ? Style.NodeTitleDisabledClass : Style.NodeTitleSelectableClass)"
-            @onclick="@(() => OnSelectNode(DataContext))">
-                @TitleTemplate((TNode)DataContext)
-            </span>
-        </div>
-    }
+        }
+        else
+        {
+            @* Spacer für Blätter ohne Kinder *@
+            <span style="width: 1.2rem;"></span>
+        }
+    </span>
+    <span class="uic-tree__title">@TitleTemplate((TNode)DataContext)</span>
 </div>
 
-
-@foreach (TNode n in DataContext.Children)
+@if (DataContext.IsExpanded)
 {
-    ITreeNode node = n as ITreeNode;
-
-    <div class="uic-tree @(DataContext.IsExpanded ? "" : "uic-tree--hidden")">
-        <MvvmTreeNode @key="node"
-                        TNode="TNode"
-                        DataContext="node"
-                        TitleTemplate="TitleTemplate"
-                        LoadingTemplate="LoadingTemplate"
-                        Style="Style"
-                        TreeNodeChanged="TreeNodeChanged" />
-
+    @* Dieser Block erzeugt die vertikale Hilfslinie durch border-left *@
+    <div class="uic-tree__children">
+        @foreach (TNode node in DataContext.Children)
+        {
+            <MvvmTreeNode @key="node" TNode="TNode" DataContext="(ITreeNode)node"
+                  TitleTemplate="TitleTemplate" Style="Style" />
+        }
     </div>
 }
-
-
-
-
-
-
