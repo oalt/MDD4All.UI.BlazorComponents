@@ -1,68 +1,90 @@
-﻿/* --- MvvmTreeNode.razor.css --- */
-
-.uic-tree-row {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center;
-    /* Höhe leicht erhöht für bessere Klickbarkeit bei Zoom */
-    height: 1.5rem;
-    cursor: pointer;
-    white-space: nowrap;
-    position: relative;
-    width: max-content;
-    min-width: 100%;
-    /* Abstände in rem für Skalierbarkeit */
-    margin-left: 0.5rem;
-    margin-right: 0.375rem;
-    padding: 0 0.375rem;
-    border-radius: 0.25rem;
-    transition: background-color 0.1s;
+﻿.uic-tree-row {
+    display: flex !important; /* Ensures horizontal alignment of icon and text */
+    flex-direction: row !important; /* Forces items to stay in a single line */
+    align-items: center; /* Vertically centers the content within the row */
+    height: 1.5rem; /* Sets a fixed height for consistent click areas */
+    cursor: pointer; /* Shows the hand icon to indicate interactability */
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    position: relative; /* Provides a reference for absolute-positioned children */
+    width: max-content; /* Ensures the width matches the internal content */
+    min-width: 100%; /* Ensures the hover effect spans the full width */
+    margin-left: 0.5rem; /* Internal left spacing for the row container */
+    margin-right: 0.375rem; /* Internal right spacing for the row container */
+    padding: 0 0.375rem; /* Internal horizontal padding */
+    border-radius: 0.25rem; /* Slightly rounds the corners for a modern look */
+    transition: background-color 0.1s; /* Smoothly fades the background color changes */
 }
 
     .uic-tree-row.is-selected {
-        background-color: var(--hover-blue) !important; /* Nutzt globale Variable */
-        color: var(--accent-color) !important; /* Nutzt globale Variable */
-        font-weight: 600;
+        background-color: var(--hover-blue) !important; /* Highlights active node using theme variable */
+        color: var(--accent-color) !important; /* Sets the text color for the selected state */
+        font-weight: 600; /* Makes the selected node text bold */
     }
 
     .uic-tree-row:hover {
-        background-color: #f0f0f0 !important;
-        color: #000 !important;
+        background-color: #f0f0f0 !important; /* Visual feedback when the mouse is over a node */
+        color: #000 !important; /* Forces black text on hover */
     }
 
 .uic-tree__icon-box {
-    /* Icon-Box in rem für Proportion zum Text */
-    width: 1.25rem;
-    height: 1.25rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
+    width: 1.25rem; /* Fixed width for the expansion toggle container */
+    height: 1.25rem; /* Fixed height for the expansion toggle container */
+    display: flex; /* Uses flexbox to center the SVG chevron */
+    justify-content: center; /* Centers the icon horizontally */
+    align-items: center; /* Centers the icon vertically */
+    flex-shrink: 0; /* Prevents icon from being squeezed by long text */
+}
+
+.uic-mono-icon {
+    font-family: 'Consolas', monospace; /* Monospaced font for a technical code look */
+    font-size: 0.75rem; /* Size adjusted to fit nicely inside the circle */
+    color: #7a7a7a; /* Neutral gray base color */
+    display: flex; /* Changed to flex for centering inside the circle */
+    justify-content: center; /* Centers the letter horizontally */
+    align-items: center; /* Centers the letter vertically */
+    width: 1.1rem; /* Fixed width for the circle */
+    height: 1.1rem; /* Fixed height equal to width for a perfect circle */
+    border: 1px solid currentColor; /* Adds a thin border matching the text color */
+    border-radius: 50%; /* Makes the container circular */
+    margin-right: 5px; /* Spacing between the circle and the title */
+    font-weight: normal; /* Keeps the letter weight light */
+    user-select: none; /* Prevents selection of the indicator */
+    flex-shrink: 0; /* Ensures the circle retains its shape */
+}
+
+/* Adjust symbol color when row is selected */
+.uic-tree-row.is-selected .uic-mono-icon {
+    color: inherit; /* Border and text inherit the highlight color */
+    opacity: 0.9; /* Slight transparency for visual balance */
 }
 
 .tree-svg {
-    width: 0.8rem;
-    height: 0.8rem;
-    fill: none;
-    stroke: #000000 !important;
-    stroke-width: 1.4px; /* SVG-Stroke kann in px bleiben für Schärfe */
-    stroke-linecap: round;
-    stroke-linejoin: round;
+    width: 0.8rem; /* Controls the physical size of the SVG chevron */
+    height: 0.8rem; /* Controls the physical size of the SVG chevron */
+    fill: none; /* Keeps the chevron shape hollow */
+    stroke: #000000 !important; /* Sets the color of the chevron lines */
+    stroke-width: 1.4px; /* Defines the thickness of the chevron lines */
+    stroke-linecap: round; /* Rounds the ends of the lines */
+    stroke-linejoin: round; /* Rounds the corners where lines meet */
+    transition: transform 0.15s ease; /* Animates the rotation when expanding/collapsing */
 }
 
+    /* CSS-based rotation instead of swapping SVGs */
+    .tree-svg.is-expanded {
+        transform: rotate(90deg); /* Rotates chevron downwards when node is open */
+    }
+
 .uic-tree__title {
-    /* Nutzt nun automatisch die globale Schriftgröße oder rem */
-    font-size: 0.95rem;
-    user-select: none;
-    padding-left: 0.375rem;
+    font-size: 0.95rem; /* Slightly smaller for a compact tree look */
+    user-select: none; /* Prevents text selection when clicking nodes */
+    padding-left: 0.25rem; /* Adjusted padding relative to the new circle icon */
 }
 
 .uic-tree__children {
-    position: relative;
-    /* Einzug der Kinder in rem */
-    margin-left: 1.5rem;
-    border-left: 1px solid var(--border-color); /* Nutzt globale Variable */
-    padding-left: 0.125rem;
-    margin-top: 0;
-    min-width: max-content;
+    position: relative; /* Context for nested child elements */
+    margin-left: 1.5rem; /* Creates the visual indentation for sub-levels */
+    border-left: 1px solid var(--border-color); /* Draws the vertical guide line for the tree */
+    padding-left: 0.125rem; /* Prevents children from sticking to the line */
+    margin-top: 0; /* Removes unnecessary vertical gap */
+    min-width: max-content; /* Ensures container expands with its content */
 }

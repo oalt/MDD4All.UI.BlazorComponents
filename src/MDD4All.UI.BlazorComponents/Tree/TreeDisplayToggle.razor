@@ -1,0 +1,23 @@
+﻿<div class="form-check form-switch d-flex align-items-center gap-2 m-0 p-0 toggle-container">
+
+    <label class="stepper-label m-0" for="iconSwitch">Expolorericons</label>
+    
+    <input class="form-check-input m-0" 
+           type="checkbox" 
+           role="switch" 
+           id="iconSwitch" 
+           checked="@Active" 
+           @onchange="HandleToggle"
+           style="cursor: pointer; width: 2.5rem; height: 1.25rem;" />
+</div>
+
+@code {
+    [Parameter] public bool Active { get; set; }
+    [Parameter] public EventCallback<bool> ActiveChanged { get; set; }
+
+    private async Task HandleToggle(ChangeEventArgs e)
+    {
+        Active = (bool)(e.Value ?? false);
+        await ActiveChanged.InvokeAsync(Active);
+    }
+}

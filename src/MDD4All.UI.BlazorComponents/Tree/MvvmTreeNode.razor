@@ -1,44 +1,42 @@
 ﻿@using MDD4All.UI.DataModels.Tree
-@using Microsoft.AspNetCore.Components.Web
-@using MDD4All.UI.BlazorComponents.Tree
-
+@using MDD4All.DME.ViewModels
 @typeparam TNode
 
-@* Row-Container mit dynamischer Selektions-Klasse *@
 <div class="uic-tree-row @(DataContext.IsSelected ? "is-selected" : "")" @onclick="@(() => OnSelectNode(DataContext))">
+
     <span class="uic-tree__icon-box" @onclick="@(() => OnToggleNode(DataContext, !DataContext.IsExpanded))" @onclick:stopPropagation="true">
         @if (DataContext.Children.Any())
         {
-            @if (DataContext.IsExpanded)
-            {
-                <svg class="tree-svg" viewBox="0 0 24 24">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-            }
-            else
-            {
-                <svg class="tree-svg" viewBox="0 0 24 24">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-            }
-        }
-        else
-        {
-            @* Spacer für Blätter ohne Kinder *@
-            <span style="width: 1.2rem;"></span>
+            <svg class="tree-svg @(DataContext.IsExpanded ? "is-expanded" : "")" viewBox="0 0 24 24">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
         }
     </span>
+
+    @if (ShowTreeIcons)
+    {
+        var symbol = GetTypeSymbol();
+        if (!string.IsNullOrEmpty(symbol))
+        {
+            <span class="uic-mono-icon">@symbol</span>
+        }
+    }
+
     <span class="uic-tree__title">@TitleTemplate((TNode)DataContext)</span>
 </div>
 
 @if (DataContext.IsExpanded)
 {
-    @* Dieser Block erzeugt die vertikale Hilfslinie durch border-left *@
     <div class="uic-tree__children">
         @foreach (TNode node in DataContext.Children)
         {
-            <MvvmTreeNode @key="node" TNode="TNode" DataContext="(ITreeNode)node"
-                  TitleTemplate="TitleTemplate" Style="Style" />
+            <MvvmTreeNode @key="node"
+                  TNode="TNode"
+                  DataContext="(ITreeNode)node"
+                  TitleTemplate="TitleTemplate"
+                  Style="Style"
+                  ShowTreeIcons="ShowTreeIcons" />
+
         }
     </div>
 }

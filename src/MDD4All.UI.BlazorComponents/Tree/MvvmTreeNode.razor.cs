@@ -1,3 +1,5 @@
+using MDD4All.DME.Analyzers;
+using MDD4All.DME.ViewModels;
 using MDD4All.UI.BlazorComponents.Services;
 using MDD4All.UI.DataModels.DragDrop;
 using MDD4All.UI.DataModels.Tree;
@@ -25,6 +27,9 @@ namespace MDD4All.UI.BlazorComponents.Tree
 
         [Parameter]
         public EventCallback<ITreeNode> TreeNodeChanged { get; set; }
+
+        [Parameter]
+        public bool ShowTreeIcons { get; set; } = true;
 
         protected override void OnInitialized()
         {
@@ -86,5 +91,31 @@ namespace MDD4All.UI.BlazorComponents.Tree
             }
         }
 
+
+        private string GetTypeSymbol()
+        {
+            if (DataContext is ObjectEditorViewModel viewModel)
+            {
+                switch (viewModel.TypeCategory)
+                {
+                    case TypeCategory.Simple:
+                    case TypeCategory.SimpleNullable:
+                        return "s";
+
+                    case TypeCategory.IList:
+                    case TypeCategory.Array:
+                    case TypeCategory.IDictionary:
+                        return "c";
+
+                    case TypeCategory.None:
+                        return "O";
+
+                    default:
+                        return "";
+                }
+            }
+
+            return "";
+        }
     }
 }
