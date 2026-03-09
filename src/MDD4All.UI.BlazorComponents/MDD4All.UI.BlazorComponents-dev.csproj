@@ -20,7 +20,7 @@
 
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\MDD4All.DME\MDD4All.DME.DataModels\MDD4All.DME.ViewModels.csproj" />
+      <ProjectReference Include="..\..\..\MDD4All.DME\MDD4All.DME.DataModels\MDD4All.DME.ViewModels.Editor.csproj" />
       <ProjectReference Include="..\..\..\MDD4All.UI.DataModels\src\MDD4All.UI.DataModels\MDD4All.UI.DataModels-dev.csproj" />
     </ItemGroup>
 
