@@ -1,0 +1,21 @@
+﻿@using System.Globalization
+
+<span class="dropdown">
+    <button class="btn btn-light dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown">
+        <CountryFlag CountryCode="@LanguageSetter.CurrentCulture.Name"/> @LanguageSetter.CurrentCulture.DisplayName
+    </button>
+
+    <ul class="dropdown-menu">
+        @foreach (CultureInfo cultureInfo in LanguageSetter.SupportedCultures)
+        {
+            string cultureID = cultureInfo.Name;
+            <li>
+            <a class="dropdown-item" @onclick="() => OnChangeLanguage(cultureID)">
+                 <CountryFlag CountryCode="@cultureInfo.Name" /> @cultureInfo.DisplayName
+            </a>
+        </li>
+        }
+    </ul>
+</span>
+
+
